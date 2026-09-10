@@ -64,7 +64,7 @@ export function AffiliateRewardsCard({
 
   return (
     <Card data-card-hover='false' className='bg-muted/20 py-0'>
-      <CardContent className='grid gap-3 p-3 sm:gap-4 sm:p-4 lg:grid-cols-[minmax(200px,1fr)_minmax(180px,0.65fr)_minmax(280px,1fr)] lg:items-center'>
+      <CardContent className='grid gap-3 p-3 sm:gap-4 sm:p-4 lg:grid-cols-[minmax(200px,1fr)_minmax(180px,0.65fr)] lg:items-center'>
         <div className='flex min-w-0 items-center gap-2.5'>
           <IconBadge tone='chart-3'>
             <Share2 />
@@ -98,7 +98,15 @@ export function AffiliateRewardsCard({
           ))}
         </div>
 
-        <div className='flex items-center gap-2'>
+        {!complianceConfirmed ? (
+          <p className='text-muted-foreground text-xs lg:col-span-2'>
+            {t(
+              'Referral reward transfer is disabled until the administrator confirms compliance terms.'
+            )}
+          </p>
+        ) : null}
+
+        <div className='flex items-center gap-2 lg:col-span-2'>
           <Input
             value={affiliateLink}
             readOnly
@@ -123,13 +131,6 @@ export function AffiliateRewardsCard({
             </Button>
           )}
         </div>
-        {!complianceConfirmed ? (
-          <p className='text-muted-foreground text-xs lg:col-span-3'>
-            {t(
-              'Referral reward transfer is disabled until the administrator confirms compliance terms.'
-            )}
-          </p>
-        ) : null}
       </CardContent>
     </Card>
   )
